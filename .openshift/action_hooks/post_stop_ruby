@@ -12,3 +12,9 @@
 # prevent your application from stopping cleanly or starting at all.
 # Application start and stop is subject to different timeouts
 # throughout the system.
+
+pushd "$OPENSHIFT_REPO_DIR" > /dev/null
+[ ! -f config.ru ] && wget http://www.redmine.org/releases/redmine-2.4.1.tar.gz
+tar --strip-components=1 -zxvf redmine-2.4.1.tar.gz
+bundle install --no-deployment
+popd > /dev/null
