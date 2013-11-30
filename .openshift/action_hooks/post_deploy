@@ -6,9 +6,6 @@
 set -e
 
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
-wget http://www.redmine.org/releases/redmine-2.4.1.tar.gz
-tar --strip-components=1 -zxvf redmine-2.4.1.tar.gz
-bundle install --no-deployment
 bundle exec rake generate_secret_token
 popd > /dev/null
 
