@@ -18,6 +18,7 @@ function check_redmine() {
     tar --strip-components=1 redmine-2.3.4.tar.gz && rm redmine-2.3.4.tar.gz
 	wget --no-check-certificate https://gist.github.com/tigefa4u/8215989/raw/4055a0ad6d7357e637de96232c70dc72047b722e/database.yml && cp database.yml config/database.yml
     gem install bundle --no-ri --no-rdoc
+	bundle install --no-deployment
     rake generate_secret_token
     RAILS_ENV=production rake db:migrate
 	RAILS_ENV=production REDMINE_LANG=en rake redmine:load_default_data
