@@ -3,3 +3,27 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+function check_redmine() {
+    msg_info "Checking for redmine..."
+    if [ -d $OPENSHIFT_REPO_DIR/database.yml ]; then
+        msg_success "Checking for redmine... already installed."
+        return
+    fi
+
+    msg_info "Installing redmine 2.3.4..."
+    cd $OPENSHIFT_REPO_DIR
+    wget http://www.redmine.org/releases/redmine-2.3.4.tar.gz
+
+    tar --strip-components=1 redmine-2.3.4.tar.gz && rm redmine-2.3.4.tar.gz
+	wget --no-check-certificate https://gist.github.com/tigefa4u/8215989/raw/4055a0ad6d7357e637de96232c70dc72047b722e/database.yml && cp database.yml config/database.yml
+    gem install bundle --no-ri --no-rdoc
+    rake generate_secret_token
+    RAILS_ENV=production rake db:migrate
+	RAILS_ENV=production REDMINE_LANG=en rake redmine:load_default_data
+	mkdir -p tmp tmp/pdf public/plugin_assets
+	sudo chmod -R 755 files log tmp public/plugin_assets
+
+    check_status $? "Installing redmine 2.3.4..."
+}
+

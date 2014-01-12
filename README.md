@@ -1,11 +1,29 @@
 redmine-openshift-quickstarts
 =============================
 
-Redmine 2.4.1 is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.
+Redmine 2.3.4 is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.
 
-### Install
+### Install Instants
 
 ```sh
-rhc app create redminequickstarts ruby-1.9 mysql-5.1 --from-code git://github.com/tigefa4u/redmine-openshift-quickstarts.git
+rhc app create <app-name> ruby-1.9 mysql-5.1 --from-code https://github.com/tigefa4u/redmine-openshift-quickstarts.git
+```
+
+### Install push
+
+```sh
+$ rhc app create <app-name> ruby-1.9 mysql-5.1
+$ cd <app-name>
+$ git remote add upstream -m master https://github.com/tigefa4u/redmine-openshift-quickstarts.git
+$ git pull -s recursive -X theirs upstream master
+$ git push
+```
+
+### Change redmine version
+
+change this line on [.openshift](.openshift/action_hooks/build) [view latest version](http://www.redmine.org/projects/redmine/wiki/Download)
+
+```sh
+wget http://www.redmine.org/releases/redmine-2.3.4.tar.gz
 ```
 
