@@ -27,3 +27,4 @@ function check_redmine() {
     check_status $? "Installing redmine 2.3.4..."
 }
 
+check_redmine
