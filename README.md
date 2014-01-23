@@ -21,7 +21,7 @@ $ git push
 
 ### Change redmine version
 
-change this line on [.openshift](.openshift/action_hooks/build) [view latest version](http://www.redmine.org/projects/redmine/wiki/Download)
+change this line 16 [.openshift](https://github.com/tigefa4u/redmine-openshift-quickstarts/blob/master/.openshift/action_hooks/build#L16) [view latest version](http://www.redmine.org/projects/redmine/wiki/Download)
 
 ```sh
 wget http://www.redmine.org/releases/redmine-2.3.4.tar.gz
